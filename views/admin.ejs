@@ -1,0 +1,24 @@
+<h1 class="mt-4">Dashboard</h1>
+<p class="lead mb-3">Welcome <%= user.name %>
+</p>
+<p class="lead mb-3">admin</p>
+<h4 class="mt-4">Current Active Sessions: </h4>
+
+    <div>
+        <% for (let i=0; i < sessionsID.length; i++ ) { %>
+            <% if (sessions[sessionsID[i]].passport.user) {%>
+                <div>
+                    <form action="/admin" method="POST">
+                        <p class="lead mb-1">SessionID: <%= sessionsID[i] %>
+                        </p>
+                        <p class="lead mb-1">UserID: <%= sessions[sessionsID[i]].passport.user %>
+                        </p>
+                        <input type="hidden" name="SID" value="<%= sessionsID[i] %>">
+                        <button type="submit" class="btn btn"  >Revoke Session</button>
+                    </form>
+                <div>
+            <% } %>
+        <% } %>
+    </div>
+
+<a href="/auth/logout" class="btn btn-secondary">Logout</a>
